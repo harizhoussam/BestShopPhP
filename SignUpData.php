@@ -7,6 +7,8 @@
    $username = $_POST['username'];
    $password = $_POST['password'];
    $fullname = $_POST['fullname'];
+   
+   $hashedPass= password_hash($password, PASSWORD_DEFAULT);
 
 	if (!empty($_POST['fullname'])  && !empty($_POST['username']) && !empty($_POST['password']))
 	{
@@ -18,7 +20,7 @@
 			else{
 				
 			   $result = mysqli_query($con,"INSERT INTO users (fullname, username, password) VALUES 
-			   ('$fullname','$username','$password')");
+			   ('$fullname','$username','$hashedPass')");
 			   
 				if ($result) {
 						echo "SignUp Successful";
