@@ -11,18 +11,19 @@
  $Latitude=$_POST['latitude'];
 
    
-  $GetOldIdSQL ="SELECT id FROM marketposts ORDER BY id ASC";
+   $GetOldIdSQL ="SELECT id FROM marketposts ORDER BY id DESC";
  
  $Query = mysqli_query($con,$GetOldIdSQL);
  
- while($row = mysqli_fetch_array($Query)){
- $DefaultId = $row['id']; }
+$row = mysqli_fetch_array($Query);
+
+ $DefaultId = $row['id']; 
  $file = "$DefaultId.png";
   
   $result = mysqli_query($con,"INSERT INTO marketposts (id, username, text, image, longitude, latitude) VALUES ($DefaultId + 1,'$Username','$PostText','$DefaultId.png','$Longitude', '$Latitude')");
    
    if ($result) {
-	   //file_put_contents($file,base64_decode($ImageData));
+
 	   file_put_contents("PostsImages/MarketPosts/$file",base64_decode($ImageData));
             echo "Posted";
         } else echo "Post Failed, Try Again Later";
